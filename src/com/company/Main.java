@@ -8,7 +8,7 @@ public class Main {
 	// программа для выполнения таска 2
         MainFrame frame = new MainFrame();
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        frame.setSize(600, 400);
+        frame.setSize(800, 800);
         frame.setVisible(true);
 
     }

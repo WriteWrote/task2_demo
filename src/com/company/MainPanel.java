@@ -1,7 +1,9 @@
 package com.company;
 
 import com.company.linedrawers.BriezenhaimLineDrawer;
+import com.company.linedrawers.DDALineDrawer;
 import com.company.linedrawers.GraphicsLineDrawer;
+import com.company.pixeldrawes.GraphicsPixelDrawer;
 import com.company.utils.DrawUtils;
 
 import javax.sound.sampled.Line;
@@ -24,10 +26,15 @@ public class MainPanel extends JPanel implements MouseMotionListener {
         BufferedImage bi = new BufferedImage(getWidth(), getHeight(), BufferedImage.TYPE_INT_RGB);
         Graphics bi_g = bi.createGraphics();
 
-        LineDrawer ld = new GraphicsLineDrawer(bi_g);
+        bi_g.setColor(Color.white);
+        bi_g.fillRect(0, 0, getWidth(), getHeight());
+        bi_g.setColor(Color.black);
+
+        PixelDrawer pd = new GraphicsPixelDrawer(bi_g);
+        LineDrawer ld = new DDALineDrawer(pd);
         // алгоритм, который сам придумывает, почему и как выбирать drawer (мин - свитч и иф или четыре панели/объекта для сравнения)
         // шикарно - порождающий паттерн проектирования (конкретнее - абстрактная фабрика)
-        LineDrawer brd = new BriezenhaimLineDrawer();
+        //LineDrawer brd = new BriezenhaimLineDrawer();
         drawAll(ld);
         g.drawImage(bi, 0, 0, null);
         bi_g.dispose();
@@ -35,7 +42,7 @@ public class MainPanel extends JPanel implements MouseMotionListener {
 
     private void drawAll(LineDrawer ld) {
         /**/
-        DrawUtils.drawSnowFlake(ld, 100, 100, 50, 13);
+        DrawUtils.drawSnowFlake(ld, getWidth() / 2, getHeight() / 2, 100, 13);
         ld.drawLine(getWidth() / 2, getHeight() / 2, position.x, position.y);
         /**/
     }
